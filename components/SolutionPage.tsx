@@ -15,7 +15,6 @@ type Solution = {
   title: string;
   lead: string;
   description: string;
-  accent: string;
   lanes: readonly string[];
   stats: readonly (readonly [string, string])[];
   steps: readonly { n: string; title: string; body: string }[];

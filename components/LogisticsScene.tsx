@@ -137,13 +137,13 @@ function Truck({ progress, network = false }: { progress: number; network?: bool
 
 function Yard({ progress, network }: { progress: number; network?: boolean }) {
   const containers = useMemo(() => {
-    const items: { pos: [number, number, number]; rot: number; accent: boolean; scale: number }[] = [];
+    const items: { position: [number, number, number]; rotation: number; accent: boolean; scale: number }[] = [];
     const rows = network ? 3 : 4;
     for (let i = 0; i < rows; i++) {
       for (let j = 0; j < 4; j++) {
         const x = -5 + i * 3.2;
         const z = -3.8 + j * 2.3;
-        items.push({ pos: [x, 0.78 + (j % 3 === 0 ? 0.75 : 0), z], rot: (i % 2 ? 0.08 : -0.05), accent: (i === 1 && j === 1) || (i === 2 && j === 3), scale: 1 - i * 0.03 });
+        items.push({ position: [x, 0.78 + (j % 3 === 0 ? 0.75 : 0), z], rotation: (i % 2 ? 0.08 : -0.05), accent: (i === 1 && j === 1) || (i === 2 && j === 3), scale: 1 - i * 0.03 });
       }
     }
     return items;
