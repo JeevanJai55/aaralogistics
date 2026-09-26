@@ -135,25 +135,9 @@ function Truck({ progress, network = false }: { progress: number; network?: bool
   );
 }
 
-function Yard({ progress, network }: { progress: number; network?: boolean }) {
-  const containers = useMemo(() => {
-    const items: { position: [number, number, number]; rotation: number; accent: boolean; scale: number }[] = [];
-    const rows = network ? 3 : 4;
-    for (let i = 0; i < rows; i++) {
-      for (let j = 0; j < 4; j++) {
-        const x = -5 + i * 3.2;
-        const z = -3.8 + j * 2.3;
-        items.push({ position: [x, 0.78 + (j % 3 === 0 ? 0.75 : 0), z], rotation: (i % 2 ? 0.08 : -0.05), accent: (i === 1 && j === 1) || (i === 2 && j === 3), scale: 1 - i * 0.03 });
-      }
-    }
-    return items;
-  }, [network]);
-
+function Yard({ network }: { network?: boolean }) {
   return (
     <group position={[0, 0, -0.2]} rotation={[0, 0, 0]}>
-      {containers.map((item, idx) => (
-        <Container key={idx} {...item} />
-      ))}
       <gridHelper args={[22, 22, '#2c5a7c', '#0a2742']} position={[0, 0, 0]} rotation={[0, 0, 0]} />
       <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.02, 0]} receiveShadow>
         <planeGeometry args={[24, 24]} />
@@ -199,7 +183,7 @@ export default function LogisticsScene({ progress, mode = 'hero' }: SceneProps) 
       <pointLight position={[-5, 3, 2]} intensity={18} distance={14} color="#ffd21a" />
       <pointLight position={[6, 4, -4]} intensity={10} distance={18} color="#9bc2df" />
       <Float speed={1.1} rotationIntensity={0.08} floatIntensity={0.1}>
-        <Yard progress={progress} network={network} />
+        <Yard network={network} />
         <Truck progress={progress + 0.1} network={network} />
       </Float>
       {network && (
